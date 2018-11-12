@@ -13,7 +13,7 @@ cd js-game-template
 npm install
 npm run server
 ```
-:sparkles: Congrats! Now visit the URL http://localhost/.
+:sparkles: Congrats! Now visit the URL http://localhost:8080/.
 
 ## useful resources
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript
