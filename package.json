@@ -1,0 +1,30 @@
+{
+  "name": "js-game-template",
+  "version": "1.0.0",
+  "description": "a simple template for JavaScript games",
+  "scripts": {
+    "server": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/motivationsbanner/js-game-template.git"
+  },
+  "author": "motivationsbanner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/motivationsbanner/js-game-template/issues"
+  },
+  "homepage": "https://github.com/motivationsbanner/js-game-template#readme",
+  "dependencies": {
+    "npm": "^6.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "babel-loader": "^8.0.4",
+    "pixi.js": "^4.8.2",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}
