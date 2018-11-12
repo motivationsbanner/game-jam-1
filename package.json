@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "a simple template for JavaScript games",
   "scripts": {
+    "build": "webpack -p",
     "server": "webpack-dev-server"
   },
   "repository": {
