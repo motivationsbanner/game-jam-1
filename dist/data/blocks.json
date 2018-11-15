@@ -1,0 +1,266 @@
+[
+    {
+        "name": "grass",
+        "hitbox": false,
+        "xpos": 0,
+        "ypos": 0
+    },
+    {
+        "name": "stone",
+        "hitbox": true,
+        "xpos": 4,
+        "ypos": 0
+    },
+    {
+        "name": "sand",
+        "hitbox": false,
+        "xpos": 2,
+        "ypos": 0
+    },
+    {
+        "name": "stone2",
+        "hitbox": true,
+        "xpos": 3,
+        "ypos": 0
+    },
+    {
+        "name": "stone3",
+        "hitbox": false,
+        "xpos": 1,
+        "ypos": 0
+    },
+    {
+        "name": "dirt",
+        "hitbox": false,
+        "xpos": 5,
+        "ypos": 0
+    },
+    {
+        "name": "prison_door",
+        "hitbox": true,
+        "xpos": 6,
+        "ypos": 0
+    },
+    {
+        "name": "damaged_stone3",
+        "hitbox": false,
+        "xpos": 7,
+        "ypos": 0
+    },
+    {
+        "name": "table_ul",
+        "hitbox": true,
+        "xpos": 0,
+        "ypos": 1
+    },
+    {
+        "name": "table_uc",
+        "hitbox": true,
+        "xpos": 1,
+        "ypos": 1
+    },
+    {
+        "name": "table_ur",
+        "hitbox": true,
+        "xpos": 2,
+        "ypos": 1
+    },
+    {
+        "name": "table_mr",
+        "hitbox": true,
+        "xpos": 0,
+        "ypos": 2
+    },
+    {
+        "name": "table_mc",
+        "hitbox": true,
+        "xpos": 1,
+        "ypos": 2
+    },
+    {
+        "name": "table_ml",
+        "hitbox": true,
+        "xpos": 2,
+        "ypos": 2
+    },
+    {
+        "name": "table_bl",
+        "hitbox": true,
+        "xpos": 0,
+        "ypos": 3
+    },
+    {
+        "name": "table_bc",
+        "hitbox": true,
+        "xpos": 1,
+        "ypos": 3
+    },
+    {
+        "name": "table_br",
+        "hitbox": true,
+        "xpos": 2,
+        "ypos": 3
+    },
+    {
+        "name": "sandstone",
+        "hitbox": true,
+        "xpos": 3,
+        "ypos": 1
+    },
+    {
+        "name": "cactus",
+        "hitbox": true,
+        "xpos": 4,
+        "ypos": 1
+    },
+    {
+        "name": "water",
+        "hitbox": true,
+        "xpos": 5,
+        "ypos": 1
+    },
+    {
+        "name": "sand_grass",
+        "hitbox": true,
+        "xpos": 6,
+        "ypos": 1
+    },
+    {
+        "name": "sand_bush",
+        "hitbox": true,
+        "xpos": 7,
+        "ypos": 1
+    },
+    {
+        "name": "bush",
+        "hitbox": false,
+        "xpos": 3,
+        "ypos": 2
+    },
+    {
+        "name": "flowers_red",
+        "hitbox": false,
+        "xpos": 4,
+        "ypos": 2
+    },
+    {
+        "name": "flowers_orange",
+        "hitbox": false,
+        "xpos": 5,
+        "ypos": 2
+    },
+    {
+        "name": "flowers_purble",
+        "hitbox": false,
+        "xpos": 6,
+        "ypos": 2
+    },
+    {
+        "name": "flowers_blue",
+        "hitbox": false,
+        "xpos": 7,
+        "ypos": 2
+    },
+    {
+        "name": "bridge",
+        "hitbox": false,
+        "xpos": 3,
+        "ypos": 3
+    },
+    {
+        "name": "fence_ul",
+        "hitbox": true,
+        "xpos": 4,
+        "ypos": 3
+    },
+    {
+        "name": "fence_um",
+        "hitbox": true,
+        "xpos": 5,
+        "ypos": 3
+    },
+    {
+        "name": "fence_ur",
+        "hitbox": true,
+        "xpos": 6,
+        "ypos": 3
+    },
+    {
+        "name": "fence_ml",
+        "hitbox": true,
+        "xpos": 4,
+        "ypos": 4
+    },
+    {
+        "name": "fence_mr",
+        "hitbox": true,
+        "xpos": 6,
+        "ypos": 4
+    },
+    {
+        "name": "fence_bl",
+        "hitbox": true,
+        "xpos": 4,
+        "ypos": 5
+    },
+    {
+        "name": "fence_bm",
+        "hitbox": true,
+        "xpos": 5,
+        "ypos": 5
+    },
+    {
+        "name": "fence_br",
+        "hitbox": true,
+        "xpos": 6,
+        "ypos": 5
+    },
+    {
+        "name": "sheep",
+        "hitbox": true,
+        "xpos": 5,
+        "ypos": 4
+    },
+    {
+        "name": "hay_ball",
+        "hitbox": true,
+        "xpos": 7,
+        "ypos": 3
+    },
+    {
+        "name": "fountain_ul",
+        "hitbox": true,
+        "xpos": 2,
+        "ypos": 4
+    },
+    {
+        "name": "fountain_ur",
+        "hitbox": true,
+        "xpos": 3,
+        "ypos": 4
+    },
+    {
+        "name": "fountain_bl",
+        "hitbox": true,
+        "xpos": 2,
+        "ypos": 5
+    },
+    {
+        "name": "fountain_br",
+        "hitbox": true,
+        "xpos": 3,
+        "ypos": 5
+    },
+    {
+        "name": "bed_l",
+        "hitbox": true,
+        "xpos": 0,
+        "ypos": 4
+    },
+    {
+        "name": "bed_r",
+        "hitbox": true,
+        "xpos": 1,
+        "ypos": 4
+    }
+]
