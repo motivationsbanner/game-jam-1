@@ -1,4 +1,4 @@
-import { Application, Container } from 'pixi.js';
+import { Application, Container, UPDATE_PRIORITY } from 'pixi.js';
 import { Map } from './entities/map';
 import { Player } from './entities/player';
 import { getJSON } from './data';
@@ -34,17 +34,29 @@ export class Game extends Application {
   }
 
   update() {
+
     let k = keyEventHandler;
 
     let input = {
-      up: k.isPressed('w') || k.isPressed('ArrowUp') || this.touchpad.up,
-      left: k.isPressed('a') || k.isPressed('ArrowLeft') || this.touchpad.left,
-      down: k.isPressed('s') || k.isPressed('ArrowDown') || this.touchpad.down,
-      right: k.isPressed('d') || k.isPressed('ArrowRight') || this.touchpad.right
+      up: k.isKeyUp('w') || k.isKeyUp('ArrowUp'),
+      left: k.isKeyUp('a') || k.isKeyUp('ArrowLeft'),
+      down: k.isKeyUp('s') || k.isKeyUp('ArrowDown'),
+      right: k.isKeyUp('d') || k.isKeyUp('ArrowRight')
     };
 
+    // handle the turn
+    this.onTurn(input);
+
+    // handle the perspective
+    this.adjustPerspective();  
+  }
+
+  onTurn(input) {
+    // handle the player update
     this.player.update(input);
-    this.adjustPerspective();
+    
+    // handle Keys
+    keyEventHandler.keysHandled();
   }
 
   adjustSize() {
