@@ -1,7 +1,9 @@
 import { loader } from 'pixi.js';
 
-export function loadData(paths, callback) {
-  loader.add(paths).load(callback);
+export function loadData(paths) {
+  return new Promise(resolve => {
+    loader.add(paths).load(resolve);
+  });
 }
 
 export function getJSON(name) {
@@ -9,7 +11,7 @@ export function getJSON(name) {
 }
 
 export function getTexture(name) {
-  return loader.resources[`images/${name}.bmp`].texture;
+  return loader.resources[`images/${name}`].texture;
 }
 export function getBaseTexture(name) {
   return getTexture(name).baseTexture;

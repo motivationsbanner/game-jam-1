@@ -1,5 +1,5 @@
 import { Sprite, Container } from 'pixi.js';
-import { Block } from './block';
+import { createBlock } from '../helpers/block_helper';
 
 export class Map extends Container {
   constructor(data) {
@@ -10,14 +10,7 @@ export class Map extends Container {
       let row = data[y];
 
       for (let x = 0; x < row.length; x++) {
-        let blockId = row[x];
-        let block = Block.getBlockById(blockId);
-
-        let sprite = new Sprite(block.texture);
-        sprite.x = Block.BLOCK_SIZE * x;
-        sprite.y = Block.BLOCK_SIZE * y;
-
-        this.addChild(sprite);
+        this.addChild(createBlock(row[x], x, y));
       }
     }
   }
