@@ -1,22 +1,28 @@
 class KeyEventHandler {
   constructor() {
     // keep track of pressed keys
-    this.pressedKeys = [];
-
-    window.addEventListener('keydown', event => this.handleKeydown(event));
-    window.addEventListener('keyup', event => this.handleKeyup(event));
+    this.keysUp = [];
   }
 
-  handleKeydown(event) {
-    this.pressedKeys[event.key] = true;
+  handkleKeyUp(event) {
+    this.keysUp[event.key] = true;
   }
 
-  handleKeyup(event) {
-    this.pressedKeys[event.key] = false;
+  isKeyUp(key) {
+    return this.keysUp[key] === true;
   }
 
-  isPressed(key) {
-    return this.pressedKeys[key] === true;
+  keysHandled() {
+    // the keys got handled    
+    this.keysUp.forEach(function (valuem, index, array) {
+      console.log("what");
+    });
+
+    this.keysUp.forEach((_, index, l) => {
+      // reset them
+      console.log(index);
+      this.keysUp[index] = false;
+    });
   }
 }
 

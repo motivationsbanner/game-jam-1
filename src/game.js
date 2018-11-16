@@ -1,4 +1,4 @@
-import { Application, Container } from 'pixi.js';
+import { Application, Container, UPDATE_PRIORITY } from 'pixi.js';
 import { Map } from './entities/map';
 import { Player } from './entities/player';
 import { getJSON } from './data';
@@ -25,6 +25,9 @@ export class Game extends Application {
 
     this.adjustSize();
     window.addEventListener('resize', () => this.adjustSize());
+    
+    // add listener for key up event
+    window.addEventListener('keyup', event => this.doTurn(event));
 
     // for touch input
     this.touchpad = new Touchpad(this.map);
@@ -34,18 +37,34 @@ export class Game extends Application {
   }
 
   update() {
-    let k = keyEventHandler;
+    // handle the perspective
+    this.adjustPerspective();  
+  }
 
-    let input = {
-      up: k.isPressed('w') || k.isPressed('ArrowUp') || this.touchpad.up,
-      left: k.isPressed('a') || k.isPressed('ArrowLeft') || this.touchpad.left,
-      down: k.isPressed('s') || k.isPressed('ArrowDown') || this.touchpad.down,
-      right: k.isPressed('d') || k.isPressed('ArrowRight') || this.touchpad.right
+  doTurn(event) {
+    const k = event.key;
+
+    // check if the game should be restarted 
+    if (k == "Escape" || k == "r") {
+       this.resetGame();
+       return;
+    }
+
+    const input = {
+      up: k == 'w' || k == 'ArrowUp',
+      left: k == 'a' || k == 'ArrowLeft',
+      down: k == 's' || k == 'ArrowDown',
+      right: k == 'd' || k == 'ArrowRight'
     };
 
+    // handle the player update
     this.player.update(input);
-    this.adjustPerspective();
   }
+
+  resetGame() {
+    this.player.reset();
+  }
+
 
   adjustSize() {
     this.width = window.innerWidth / window.devicePixelRatio;

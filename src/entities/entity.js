@@ -17,9 +17,17 @@ export class Entity extends Sprite {
     let height = this.texture.height;
     let width = this.texture.width;
 
-    this.texture.frame = new Rectangle(0, 0, width, height);
+    this.texture.frame = new Rectangle(this.getOriginX(), this.getOriginY(), width, height);
 
     this.direction = DIRECTION.DOWN;
+  }
+
+  getOriginX() {
+    throw new Error("You have to implement the original X Position of the Entity");
+  }
+
+  getOriginY() {
+    throw new Error("You have to implement the original Y Position of the Entity");
   }
 
   /**
@@ -78,5 +86,12 @@ export class Entity extends Sprite {
   moveRight() {
     this.x += BLOCK_SIZE;
     this.direction = DIRECTION.RIGHT;
+  }
+
+  reset() {
+    this.x = this.getOriginX();
+    this.y = this.getOriginY();
+    
+    this.direction = DIRECTION.DOWN;
   }
 }
