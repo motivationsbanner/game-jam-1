@@ -1,7 +1,7 @@
 import { settings, SCALE_MODES, utils } from 'pixi.js';
 import { Game } from './game';
-import { loadData } from './data';
-import { Block } from './entities/block';
+import { loadData, getJSON } from './data';
+import { initializeBlocks } from './helpers/block_helper';
 
 // adjust pixi.js settings
 utils.sayHello('js-game-template');
@@ -12,11 +12,12 @@ settings.RESOLUTION = window.devicePixelRatio;
 loadData([
   'data/blocks.json',
   'data/map.json',
-  'images/keggly.bmp',
-  'images/blocks.bmp'
-], () => {
+  'images/frog.png'
+]).then(
+  () => loadData(getJSON('blocks').map(block => 'images/' + block.name))
+).then(() => {
   // initialize blocks
-  Block.initializeBlocks();
+  initializeBlocks();
 
   // start the game
   new Game();

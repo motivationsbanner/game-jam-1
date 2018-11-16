@@ -3,7 +3,7 @@ import { Entity } from '../entities/entity.js';
 export class Player extends Entity {
 
   constructor() {
-    super("keggly");
+    super("frog.png");
   }
 
   update({ up, left, down, right }) {
