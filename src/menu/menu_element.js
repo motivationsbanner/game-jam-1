@@ -13,7 +13,7 @@ class MenuElement extends Sprite {
     if(mapfile !== null) {
       this.on('click', (event) => {
         this.map = new Map(getJSON(mapfile));
-        game.
+
       });
     }
   }
