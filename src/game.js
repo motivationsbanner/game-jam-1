@@ -25,6 +25,9 @@ export class Game extends Application {
 
     this.adjustSize();
     window.addEventListener('resize', () => this.adjustSize());
+    
+    // add listener for key up event
+    window.addEventListener('keyup', event => this.doTurn(event));
 
     // for touch input
     this.touchpad = new Touchpad(this.map);
@@ -34,30 +37,34 @@ export class Game extends Application {
   }
 
   update() {
-
-    let k = keyEventHandler;
-
-    let input = {
-      up: k.isKeyUp('w') || k.isKeyUp('ArrowUp'),
-      left: k.isKeyUp('a') || k.isKeyUp('ArrowLeft'),
-      down: k.isKeyUp('s') || k.isKeyUp('ArrowDown'),
-      right: k.isKeyUp('d') || k.isKeyUp('ArrowRight')
-    };
-
-    // handle the turn
-    this.onTurn(input);
-
     // handle the perspective
     this.adjustPerspective();  
   }
 
-  onTurn(input) {
+  doTurn(event) {
+    const k = event.key;
+
+    // check if the game should be restarted 
+    if (k == "Escape" || k == "r") {
+       this.resetGame();
+       return;
+    }
+
+    const input = {
+      up: k == 'w' || k == 'ArrowUp',
+      left: k == 'a' || k == 'ArrowLeft',
+      down: k == 's' || k == 'ArrowDown',
+      right: k == 'd' || k == 'ArrowRight'
+    };
+
     // handle the player update
     this.player.update(input);
-    
-    // handle Keys
-    keyEventHandler.keysHandled();
   }
+
+  resetGame() {
+    this.player.reset();
+  }
+
 
   adjustSize() {
     this.width = window.innerWidth / window.devicePixelRatio;
