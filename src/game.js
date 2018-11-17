@@ -26,7 +26,7 @@ export class Game extends Application {
     window.addEventListener('resize', () => this.adjustSize());
 
     // add listener for key up event
-    window.addEventListener('keyup', event => this.doTurn(event));
+    window.addEventListener('keydown', event => this.doTurn(event));
 
     // for touch input
     this.touchpad = new Touchpad(this.level);
