@@ -1,10 +1,8 @@
-import { Rectangle, Sprite } from 'pixi.js';
-import { getTexture } from '../data';
 
-class Menu {
+export class Menu {
 
-  constructor(elements) {
-
+  constructor(game) {
+    this.game = game;
   }
 
 
