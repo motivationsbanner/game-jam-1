@@ -9,13 +9,8 @@ export class Game extends Application {
   constructor() {
     super({ view: document.getElementById('canvas') });
 
-    this.level = new Level(getJSON('map'));
-
-    // save map dimensions because getters iterate through all the blocks every time
-    this.mapHeight = this.level.height;
-    this.mapWidth = this.level.width;
-
     this.player = new Player();
+    this.loadLevel('level1');
 
     // create container to move all entities at once
     this.container = new Container();
@@ -65,11 +60,11 @@ export class Game extends Application {
     }
 
     // move the position
-    this.player.update(newPosX, newPosY );
+    this.player.update(newPosX, newPosY);
 
     for (let i = 0; i < this.level.entities.length; i++) {
       this.level.entities[i].update(newPosX, newPosY);
-    } 
+    }
 
   }
 
@@ -81,6 +76,10 @@ export class Game extends Application {
   }
 
   adjustSize() {
+    // save map dimensions because getters iterate through all the blocks every time
+    this.levelHeight = this.level.height;
+    this.levelWidth = this.level.width;
+
     this.width = window.innerWidth / window.devicePixelRatio;
     this.height = window.innerHeight / window.devicePixelRatio;
 
@@ -91,37 +90,45 @@ export class Game extends Application {
     this.renderer.resize(this.width, this.height);
 
     // set initial perspective
-    this.container.x = Math.floor((this.width - this.mapWidth) / 2);
-    this.container.y = Math.floor((this.height - this.mapHeight) / 2);
+    this.container.x = Math.floor((this.width - this.levelWidth) / 2);
+    this.container.y = Math.floor((this.height - this.levelHeight) / 2);
   }
 
   adjustPerspective() {
+    // !! THIS NEEDS TO GET ADJUSTED
+
     // adjust y-axis
-    if (this.mapWidth > this.width) {
+    if (this.levelWidth > this.width) {
       let nearTop = this.player.y <= this.halfHeight;
-      let nearBottom = this.player.y >= this.mapHeight - this.halfHeight;
+      let nearBottom = this.player.y >= this.levelHeight - this.halfHeight;
 
       if (nearTop) {
         this.container.y = 0;
       } else if (nearBottom) {
-        this.container.y = this.height - this.mapHeight;
+        this.container.y = this.height - this.levelHeight;
       } else {
         this.container.y = this.halfHeight - this.player.y;
       }
     }
 
     // adjust x-axis
-    if (this.mapHeight > this.height) {
+    if (this.levelHeight > this.height) {
       let nearLeft = this.player.x <= this.halfWidth;
-      let nearRight = this.player.x >= this.mapWidth - this.halfWidth;
+      let nearRight = this.player.x >= this.levelWidth - this.halfWidth;
 
       if (nearLeft) {
         this.container.x = 0;
       } else if (nearRight) {
-        this.container.x = this.width - this.mapWidth;
+        this.container.x = this.width - this.levelWidth;
       } else {
         this.container.x = this.halfWidth - this.player.x;
       }
     }
+  }
+
+  loadLevel(name) {
+    this.level = new Level(getJSON(name));
+    let { x, y } = this.level.getStartPosition();
+    this.player.setPosition(x, y);
   }
 }

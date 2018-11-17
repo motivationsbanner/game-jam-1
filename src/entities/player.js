@@ -10,8 +10,7 @@ export class Player extends Entity {
   }
 
   update(x, y) {
-    this.x = x * 32;
-    this.y = y * 32;
+    this.setPosition(x, y);
     
     // increase the game time
     this.turn++;
@@ -20,8 +19,8 @@ export class Player extends Entity {
   newPosition({ up, left, down, right }) {
 
     const newPos = {
-      newPosX: this.x / 32,
-      newPosY: this.y / 32
+      newPosX: this.xPos,
+      newPosY: this.yPos
     };
 
     if (up) {

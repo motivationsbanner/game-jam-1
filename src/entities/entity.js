@@ -1,8 +1,5 @@
 import { BaseBlock } from './blocks/base_block';
-import { getTexture } from '../data.js';
-import { BLOCK_SIZE } from '../helpers/block_helper';
 
-// enums
 export const DIRECTION = {
   UP: 0,
   LEFT: 1,
@@ -18,7 +15,7 @@ export class Entity extends BaseBlock {
   /**
    * Updates the Position of the Element
    */
-  update({ up, left, down, right }) {
+  update() {
     throw new Error("lul implement me bby :)");
   }
 
@@ -26,7 +23,7 @@ export class Entity extends BaseBlock {
    * Moves Up
    */
   moveUp() {
-    this.y -= BLOCK_SIZE;
+    this.yPos -= 1;
     this.direction = DIRECTION.UP;
   }
 
@@ -34,7 +31,7 @@ export class Entity extends BaseBlock {
    * Moves to the Left
    */
   moveLeft() {
-    this.x -= BLOCK_SIZE;
+    this.xPos -= 1;
     this.direction = DIRECTION.LEFT;
   }
 
@@ -42,7 +39,7 @@ export class Entity extends BaseBlock {
    * Moves Down
    */
   moveDown() {
-    this.y += BLOCK_SIZE;
+    this.yPos += 1;
     this.direction = DIRECTION.DOWN;
   }
 
@@ -50,7 +47,7 @@ export class Entity extends BaseBlock {
    * Moves to the Right
    */
   moveRight() {
-    this.x += BLOCK_SIZE;
+    this.xPos += 1;
     this.direction = DIRECTION.RIGHT;
   }
 }

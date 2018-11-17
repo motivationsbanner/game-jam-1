@@ -12,7 +12,7 @@ settings.RESOLUTION = window.devicePixelRatio;
 // load everything
 loadData([
   'data/blocks.json',
-  'data/map.json',
+  'data/level1.json',
   'data/entities.json',
   'images/frog.png'
 ]).then(
