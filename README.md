@@ -1,8 +1,8 @@
 # js-game-template
-[![Build Status](https://travis-ci.org/motivationsbanner/js-game-template.svg?branch=master)](https://travis-ci.org/motivationsbanner/js-game-template)
+[![Build Status](https://travis-ci.org/motivationsbanner/game-jam-1.svg?branch=master)](https://travis-ci.org/motivationsbanner/js-game-template)
 
-This is a basic template for **motivationsbanner** JavaScript games.  
-You can view it in action here: https://motivationsbanner.github.io/js-game-template
+This is the repository for the 1st **motivationsbanner** game jam.  
+You can view it in action here: https://motivationsbanner.github.io/game-jam-1
 
 ## setup
 To get up and running you need to
@@ -15,15 +15,3 @@ npm install
 npm run server
 ```
 :sparkles: Congrats! Now visit the URL http://localhost:8080/.
-
-## useful resources
-* https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript
-* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
-* https://pixijs.io/examples/
-* http://pixijs.download/release/docs/index.html
-* https://github.com/motivationsbanner/hamsterjump
-
-## IDE
-For a more efficient experience we suggest the usage of an IDE. An example would be [VSCode](https://code.visualstudio.com/) with the following plugins:
-* [dbaeumer.jshint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.jshint) for static code analysis
-* [EditorConfig.EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig) for consistent indentation
