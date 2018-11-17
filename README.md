@@ -1,4 +1,4 @@
-# js-game-template
+# game-jam-1
 [![Build Status](https://travis-ci.org/motivationsbanner/game-jam-1.svg?branch=master)](https://travis-ci.org/motivationsbanner/js-game-template)
 
 This is the repository for the 1st **motivationsbanner** game jam.  
