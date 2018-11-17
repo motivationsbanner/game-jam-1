@@ -1,59 +1,25 @@
-import { Rectangle, Sprite } from 'pixi.js';
+import { BaseBlock } from './blocks/base_block';
 import { getTexture } from '../data.js';
+import { BLOCK_SIZE } from '../helpers/block_helper';
 
 // enums
-const DIRECTION = {
-  DOWN: 0,
-  UP: 1,
-  RIGHT: 2,
-  LEFT: 3
+export const DIRECTION = {
+  UP: 0,
+  LEFT: 1,
+  DOWN: 2,
+  RIGHT: 3
 };
-const BLOCK_SIZE = 32;
 
-export class Entity extends Sprite {
-  constructor(textureName) {
-    super(getTexture(textureName));
-
-    let height = this.texture.height;
-    let width = this.texture.width;
-
-    this.texture.frame = new Rectangle(this.getOriginX(), this.getOriginY(), width, height);
-
-    this.direction = DIRECTION.DOWN;
-  }
-
-  getOriginX() {
-    throw new Error("You have to implement the original X Position of the Entity");
-  }
-
-  getOriginY() {
-    throw new Error("You have to implement the original Y Position of the Entity");
+export class Entity extends BaseBlock {
+  constructor(texture, x, y, solid) {
+    super(texture, x, y, solid);
   }
 
   /**
    * Updates the Position of the Element
    */
   update({ up, left, down, right }) {
-    let old = {
-      x: this.x,
-      y: this.y
-    };
-
-    if (up && !down) {
-      this.moveUp();
-    }
-
-    if (left && !right) {
-      this.moveLeft();
-    }
-
-    if (down && !up) {
-      this.moveDown();
-    }
-
-    if (right && !left) {
-      this.moveRight();
-    }
+    throw new Error("lul implement me bby :)");
   }
 
   /**
@@ -86,12 +52,5 @@ export class Entity extends Sprite {
   moveRight() {
     this.x += BLOCK_SIZE;
     this.direction = DIRECTION.RIGHT;
-  }
-
-  reset() {
-    this.x = this.getOriginX();
-    this.y = this.getOriginY();
-    
-    this.direction = DIRECTION.DOWN;
   }
 }

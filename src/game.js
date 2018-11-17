@@ -1,8 +1,7 @@
 import { Application, Container, UPDATE_PRIORITY } from 'pixi.js';
-import { Map } from './entities/map';
+import { Level } from './entities/level';
 import { Player } from './entities/player';
 import { getJSON } from './data';
-import { keyEventHandler } from './utils/key_event_handler';
 import { Touchpad } from './utils/touchpad';
 
 export class Game extends Application {
@@ -10,27 +9,27 @@ export class Game extends Application {
   constructor() {
     super({ view: document.getElementById('canvas') });
 
-    this.map = new Map(getJSON('map'));
+    this.level = new Level(getJSON('map'));
 
     // save map dimensions because getters iterate through all the blocks every time
-    this.mapHeight = this.map.height;
-    this.mapWidth = this.map.width;
+    this.mapHeight = this.level.height;
+    this.mapWidth = this.level.width;
 
     this.player = new Player();
 
     // create container to move all entities at once
     this.container = new Container();
     this.stage.addChild(this.container);
-    this.container.addChild(this.map, this.player);
+    this.container.addChild(this.level, this.player);
 
     this.adjustSize();
     window.addEventListener('resize', () => this.adjustSize());
-    
+
     // add listener for key up event
     window.addEventListener('keyup', event => this.doTurn(event));
 
     // for touch input
-    this.touchpad = new Touchpad(this.map);
+    this.touchpad = new Touchpad(this.level);
 
     // create eventloop
     this.ticker.add(delta => this.update(delta));
@@ -38,7 +37,7 @@ export class Game extends Application {
 
   update() {
     // handle the perspective
-    this.adjustPerspective();  
+    this.adjustPerspective();
   }
 
   doTurn(event) {
@@ -46,8 +45,8 @@ export class Game extends Application {
 
     // check if the game should be restarted 
     if (k == "Escape" || k == "r") {
-       this.resetGame();
-       return;
+      this.resetGame();
+      return;
     }
 
     const input = {
@@ -57,14 +56,29 @@ export class Game extends Application {
       right: k == 'd' || k == 'ArrowRight'
     };
 
-    // handle the player update
-    this.player.update(input);
+    const { newPosX, newPosY } = this.player.newPosition(input);
+
+    let solid = this.level.isNextMoveSolid(newPosX, newPosY);
+
+    if (solid) {
+      return;
+    }
+
+    // move the position
+    this.player.update(newPosX, newPosY );
+
+    for (let i = 0; i < this.level.entities.length; i++) {
+      this.level.entities[i].update(newPosX, newPosY);
+    } 
+
   }
 
-  resetGame() {
+  /**
+   * Resets the Game
+   */
+  resetGame() {
     this.player.reset();
   }
-
 
   adjustSize() {
     this.width = window.innerWidth / window.devicePixelRatio;

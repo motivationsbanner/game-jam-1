@@ -1,6 +1,17 @@
 [
-    {"id": 0, "name": "background.png"},
-    {"id": 1, "name": "startblock.png"},
-    {"id": 2, "name": "endblock.png"},
-    {"id": 3, "name": "wall.png"}
+    {
+        "id": 0,
+        "name": "background.png",
+        "solid": false
+    },
+    {
+        "id": 1,
+        "name": "startblock.png",
+        "solid": false
+    },
+    {
+        "id": 2,
+        "name": "wall.png",
+        "solid": true
+    }
 ]
