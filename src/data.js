@@ -6,12 +6,22 @@ export function loadData(paths) {
   });
 }
 
+function getResource(name) {
+  let resource = loader.resources[name];
+
+  if (resource === undefined) {
+    throw new Error(`resource ${name} not found!`);
+  }
+
+  return resource;
+}
+
 export function getJSON(name) {
-  return loader.resources[`data/${name}.json`].data;
+  return getResource(`data/${name}.json`).data;
 }
 
 export function getTexture(name) {
-  return loader.resources[`images/${name}`].texture;
+  return getResource(`images/${name}`).texture;
 }
 export function getBaseTexture(name) {
   return getTexture(name).baseTexture;

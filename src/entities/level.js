@@ -63,7 +63,7 @@ export class Level extends Container {
    */
   getStartPosition() {
     if (this.startPosition === undefined) {
-      throw new Error('there is no start-entity');
+      throw new Error('there is no start-block');
     }
 
     return this.startPosition;

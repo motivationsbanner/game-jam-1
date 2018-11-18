@@ -10,7 +10,9 @@ export class EndEntity extends Entity {
   /**
    * Updates the Position of the Element
    */
-  update() {
-    // TOOD
+  update(x, y, gameCallbacks) {
+    if (x === this.xPos && y === this.yPos) {
+      gameCallbacks.loadNextLevel();
+    }
   }
 }

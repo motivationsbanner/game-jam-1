@@ -3,22 +3,31 @@ import { Level } from './entities/level';
 import { Player } from './entities/player';
 import { getJSON } from './data';
 import { Touchpad } from './utils/touchpad';
+import { GameCallbacks } from './game_callbacks';
 
 export class Game extends Application {
 
-  constructor() {
+  constructor(levelNames) {
     super({ view: document.getElementById('canvas') });
 
+    // create player
     this.player = new Player();
-    this.loadLevel('level1');
 
     // create container to move all entities at once
     this.container = new Container();
     this.stage.addChild(this.container);
-    this.container.addChild(this.level, this.player);
+    this.container.addChild(this.player);
 
+    // load first level
+    this.levelNames = levelNames;
+    this.loadNextLevel();
+
+    // adjust the size of the game on resize
     this.adjustSize();
     window.addEventListener('resize', () => this.adjustSize());
+
+    // create gameCallbacks object
+    this.gameCallbacks = new GameCallbacks(this);
 
     // add listener for key up event
     window.addEventListener('keydown', event => this.doTurn(event));
@@ -62,10 +71,9 @@ export class Game extends Application {
     // move the position
     this.player.update(newPosX, newPosY);
 
-    for (let i = 0; i < this.level.entities.length; i++) {
-      this.level.entities[i].update(newPosX, newPosY);
+    for (let entity of this.level.entities) {
+      entity.update(newPosX, newPosY, this.gameCallbacks);
     }
-
   }
 
   /**
@@ -126,8 +134,31 @@ export class Game extends Application {
     }
   }
 
-  loadLevel(name) {
-    this.level = new Level(getJSON(name));
+  loadNextLevel() {
+    // update the levelINdex
+    if (this._levelIndex === undefined) {
+      this._levelIndex = 0;
+    } else {
+      this._levelIndex += 1;
+    }
+
+    // show a message if the player won
+    if (this._levelIndex >= this.levelNames.length) {
+      alert('you won!');
+      return;
+    }
+
+    // remove the old level
+    if (this.level !== undefined) {
+      this.container.removeChild(this.level);
+    }
+
+    // load the next level
+    let levelData = getJSON(this.levelNames[this._levelIndex]);
+    this.level = new Level(levelData);
+    this.container.addChildAt(this.level, 0); // behind the player
+
+    // set the position of the player
     let { x, y } = this.level.getStartPosition();
     this.player.setPosition(x, y);
   }
