@@ -1,10 +1,8 @@
 import { BaseEntity } from './base_entity';
 
-export const LEVER_ENTITY_ID = 1;
-
 export class LeverEntity extends BaseEntity {
-  constructor(textures, x, y, solid, options) {
-    super(textures, x, y, solid);
+  constructor(x, y, direction, options) {
+    super(LeverEntity.TEXTURES, x, y, direction, false);
 
     this.isActive = false;
     this.color = options.color; // undefined is allowed
@@ -15,7 +13,10 @@ export class LeverEntity extends BaseEntity {
       this.isActive = !this.isActive;
 
       this.texture = this.textures[this.isActive ? 1 : 0];
-      gameCallbacks.sendMessage({type: 'toggle-doors', color: this.color});
+      gameCallbacks.sendMessage({ type: 'toggle-doors', color: this.color });
     }
   }
 }
+
+LeverEntity.ID = 1;
+LeverEntity.TEXTURES = ['lever_deactivated', 'lever_activated'];

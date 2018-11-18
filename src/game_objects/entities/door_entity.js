@@ -1,10 +1,8 @@
 import { BaseEntity } from './base_entity';
 
-export const DOOR_ENTITY_ID = 2;
-
 export class DoorEntity extends BaseEntity {
-  constructor(textures, x, y, solid, options) {
-    super(textures, x, y, solid);
+  constructor(x, y, direction, options) {
+    super(DoorEntity.TEXTURES, x, y, direction, true);
     this.colors = options.colors; // undefined means all colors
     this.setOpen(options.open === true);
   }
@@ -23,3 +21,6 @@ export class DoorEntity extends BaseEntity {
     }
   }
 }
+
+DoorEntity.ID = 2;
+DoorEntity.TEXTURES = ['door_closed', 'door_open'];

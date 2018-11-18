@@ -1,15 +1,35 @@
 import { GameObject } from '../game_object';
+import { getTexture } from '../../data';
+import { directionToCoordinates } from '../../helpers/direction_helper';
 
 export class BaseEntity extends GameObject {
-  constructor(textures, x, y, solid) {
-    super(textures[0], x, y, solid);
-    this.textures = textures;
+  constructor(textures, x, y, direction, solid) {
+    super(`entities/${textures[0]}`, x, y, solid);
+    this.textures = textures.map(texture => getTexture(`entities/${texture}.png`));
+    this.direction = direction;
+  }
+
+  set direction(direction) {
+    this._direction = direction;
+    this.rotation = direction * (Math.PI / 2);
+  }
+
+  get direction() {
+    return this._direction;
+  }
+
+  moveForward() {
+    let { x, y } = directionToCoordinates(this.direction);
+    this.setPosition(this.xPos + x, this.yPos + y);
   }
 
   /**
-   * this gets executed every turn
+   * this function gets called every turn
+   * @param {number} x x coordinate
+   * @param {number} y y coordinate
+   * @param {GameCallbacks} gameCallbacks callbacks to alter the game
    */
-  update() {
+  update(x, y, gameCallbacks) {
     // can get implemented by child classes
   }
 
@@ -19,37 +39,5 @@ export class BaseEntity extends GameObject {
    */
   onMessage(message) {
     // can get implemented by child classes
-  }
-
-  /**
-   * Moves Up
-   */
-  moveUp() {
-    this.yPos -= 1;
-    this.direction = DIRECTION.UP;
-  }
-
-  /**
-   * Moves to the Left
-   */
-  moveLeft() {
-    this.xPos -= 1;
-    this.direction = DIRECTION.LEFT;
-  }
-
-  /**
-   * Moves Down
-   */
-  moveDown() {
-    this.yPos += 1;
-    this.direction = DIRECTION.DOWN;
-  }
-
-  /**
-   * Moves to the Right
-   */
-  moveRight() {
-    this.xPos += 1;
-    this.direction = DIRECTION.RIGHT;
   }
 }

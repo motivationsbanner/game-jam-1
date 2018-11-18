@@ -1,10 +1,11 @@
-import { getBlockTexture } from '../../helpers/block_helper';
-import { GameObject } from '../game_object';
+import { BaseBlock } from './base_block';
 
-export const BACKGROUND_BLOCK_ID = 0;
-
-export class BackgroundBlock extends GameObject {
+export class BackgroundBlock extends BaseBlock {
   constructor(x, y) {
-    super(getBlockTexture(BACKGROUND_BLOCK_ID), x, y);
+    super(BackgroundBlock.TEXTURE, x, y, BackgroundBlock.SOLID);
   }
 }
+
+BackgroundBlock.ID = 0;
+BackgroundBlock.SOLID = false;
+BackgroundBlock.TEXTURE = 'background';

@@ -1,33 +1,20 @@
-import { getJSON, getTexture } from '../data';
+import { DIRECTION } from './direction_helper';
 
-import { END_ENTITY_ID, EndEntity } from '../game_objects/entities/end_entity';
-import { LEVER_ENTITY_ID, LeverEntity } from '../game_objects/entities/lever_entity';
-import { DOOR_ENTITY_ID, DoorEntity } from '../game_objects/entities/door_entity';
+import { EndEntity } from '../game_objects/entities/end_entity';
+import { LeverEntity } from '../game_objects/entities/lever_entity';
+import { DoorEntity } from '../game_objects/entities/door_entity';
+import { CanonEntity } from '../game_objects/entities/canon_entity';
+import { CanonBallEntity } from '../game_objects/entities/canon_ball_entity';
 
-let entityArray = [];
-let entityClasses = [];
+export let entityClasses = [];
 
-entityClasses[END_ENTITY_ID] = EndEntity;
-entityClasses[LEVER_ENTITY_ID] = LeverEntity;
-entityClasses[DOOR_ENTITY_ID] = DoorEntity;
+[EndEntity, LeverEntity, DoorEntity, CanonEntity, CanonBallEntity]
+  .forEach(entityClass => entityClasses[entityClass.ID] = entityClass);
 
-export function initializeEntities() {
-  for (let entity of getJSON('entities')) {
-    entityArray[entity.id] = {
-      textures: entity.names.map(getTexture),
-      solid: entity.solid
-    };
+export function createEntity(id, x, y, direction = DIRECTION.UP, options = {}) {
+  if (entityClasses[id] === undefined) {
+    throw new Error(`no entity with id ${id} found`);
   }
-}
 
-function getEntityTextures(id) {
-  return entityArray[id].textures;
-}
-
-export function isEntitySolid(id) {
-  return entityArray[id].solid;
-}
-
-export function createEntity(id, x, y, options = {}) {
-  return new entityClasses[id](getEntityTextures(id), x, y, isEntitySolid(id), options);
+  return new entityClasses[id](x, y, direction, options);
 }

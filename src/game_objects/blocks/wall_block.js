@@ -1,10 +1,11 @@
-import { getBlockTexture } from '../../helpers/block_helper';
-import { GameObject } from '../game_object';
+import { BaseBlock } from './base_block';
 
-export const WALL_BLOCK_ID = 2;
-
-export class WallBlock extends GameObject {
+export class WallBlock extends BaseBlock {
   constructor(x, y) {
-    super(getBlockTexture(WALL_BLOCK_ID), x, y);
+    super(WallBlock.TEXTURE, x, y, WallBlock.SOLID);
   }
 }
+
+WallBlock.ID = 2;
+WallBlock.SOLID = true;
+WallBlock.TEXTURE = 'wall';

@@ -1,10 +1,8 @@
 import { BaseEntity } from './base_entity';
 
-export const END_ENTITY_ID = 0;
-
 export class EndEntity extends BaseEntity {
-  constructor(textures, x, y, solid) {
-    super(textures, x, y, solid);
+  constructor(x, y, direction) {
+    super(EndEntity.TEXTURES, x, y, direction, false);
   }
 
   update(x, y, gameCallbacks) {
@@ -13,3 +11,6 @@ export class EndEntity extends BaseEntity {
     }
   }
 }
+
+EndEntity.ID = 0;
+EndEntity.TEXTURES = ['end'];

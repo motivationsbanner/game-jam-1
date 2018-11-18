@@ -1,4 +1,4 @@
-import { Application, Container, UPDATE_PRIORITY } from 'pixi.js';
+import { Application, Container } from 'pixi.js';
 import { Level } from './game_objects/level';
 import { Player } from './game_objects/player';
 import { getJSON } from './data';
@@ -49,7 +49,7 @@ export class Game extends Application {
 
     // check if the game should be restarted 
     if (k == "Escape" || k == "r") {
-      this.resetGame();
+      this.restartLevel();
       return;
     }
 
@@ -62,7 +62,7 @@ export class Game extends Application {
 
     const { newPosX, newPosY } = this.player.newPosition(input);
 
-    let solid = this.level.isNextMoveSolid(newPosX, newPosY);
+    let solid = this.level.isSolid(newPosX, newPosY);
 
     if (solid) {
       return;
@@ -74,13 +74,6 @@ export class Game extends Application {
     for (let entity of this.level.entities) {
       entity.update(newPosX, newPosY, this.gameCallbacks);
     }
-  }
-
-  /**
-   * resets the game
-   */
-  resetGame() {
-    this.player.reset();
   }
 
   adjustSize() {
@@ -137,9 +130,6 @@ export class Game extends Application {
     }
   }
 
-  /**
-   * loads the next level
-   */
   loadNextLevel() {
     // update the levelIndex
     if (this._levelIndex === undefined) {
@@ -154,18 +144,27 @@ export class Game extends Application {
       return;
     }
 
+    // load the next level
+    this.loadLevel();
+  }
+
+  loadLevel() {
     // remove the old level
     if (this.level !== undefined) {
       this.container.removeChild(this.level);
     }
 
-    // load the next level
     let levelData = getJSON(this.levelNames[this._levelIndex]);
     this.level = new Level(levelData);
+
     this.container.addChildAt(this.level, 0); // behind the player
 
     // set the position of the player
     let { x, y } = this.level.getStartPosition();
     this.player.setPosition(x, y);
+  }
+
+  restartLevel() {
+    this.loadLevel();
   }
 }

@@ -1,7 +1,7 @@
 import { Container } from 'pixi.js';
 import { createBlock, isBlockSolid } from '../helpers/block_helper';
 import { createEntity } from '../helpers/entity_helper';
-import { START_BLOCK_ID } from './blocks/start_block';
+import { StartBlock } from './blocks/start_block';
 
 export class Level extends Container {
   constructor(level) {
@@ -16,7 +16,7 @@ export class Level extends Container {
       for (let x = 0; x < row.length; x++) {
         let block = row[x];
         this.addChild(createBlock(block, x, y));
-        if (block === START_BLOCK_ID) {
+        if (block === StartBlock.ID) {
           this.startPosition = { x, y };
         }
       }
@@ -27,19 +27,27 @@ export class Level extends Container {
     this.entities = [];
 
     let entities = level.entities;
-    entities.map(value => {
-      const entity = createEntity(value.id, value.x, value.y, value.options);
-      this.entities.push(entity);
-      this.addChild(entity);
+ 
+    entities.map(data => {
+      this.spawnEntity(createEntity(data.id, data.x, data.y, data.direction, data.options));
     });
   }
 
   /**
-   * returns true if the player can't visit the tile at (x, y)
+   * spawns an entity
+   * @param {Entity} entity the entity to spawn
+   */
+  spawnEntity(entity) {
+    this.entities.push(entity);
+    this.addChild(entity);
+  }
+
+  /**
+   * return true if an entity/block at x/y is solid
    * @param {number} x 
    * @param {number} y 
    */
-  isNextMoveSolid(x, y) {
+  isSolid(x, y) {
 
     if (x < 0 || y < 0 || x >= this.data[0].length || y >= this.data.length) {
       return true;

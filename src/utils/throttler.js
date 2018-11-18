@@ -5,10 +5,10 @@ export class Throttler {
     this.cooldown = 0;
   }
 
-  run() {
+  run(params = {}) {
     // only run callback every interval-th time
     if (this.cooldown === 0) {
-      this.callback();
+      this.callback(params);
       this.cooldown = this.interval;
     }
 

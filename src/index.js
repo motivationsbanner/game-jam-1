@@ -1,8 +1,8 @@
 import { settings, SCALE_MODES, utils } from 'pixi.js';
 import { Game } from './game';
-import { loadData, getJSON } from './data';
-import { initializeBlocks } from './helpers/block_helper';
-import { initializeEntities } from './helpers/entity_helper';
+import { blockClasses } from './helpers/block_helper';
+import { entityClasses } from './helpers/entity_helper';
+import { loadData } from './data';
 
 // adjust pixi.js settings
 utils.sayHello('game-jam-1');
@@ -10,29 +10,10 @@ settings.SCALE_MODE = SCALE_MODES.NEAREST;
 settings.RESOLUTION = window.devicePixelRatio;
 
 // create list of level-names
-const levelNames = [1, 2, 3].map(i => `levels/level${i}`);
+const levelNames = [1, 2, 3, 4].map(i => `levels/level${i}`);
 
 // load everything
-let data = [
-  'data/blocks.json',
-  'data/entities.json',
-  'images/frog.png'
-];
-for (let name of levelNames) {
-  data.push(`data/${name}.json`);
-}
-
-loadData(data).then(
-  () => loadData(getJSON('blocks').map(block => 'images/' + block.name))
-).then(
-  () => loadData(getJSON('entities').map(entity => entity.names
-    .map(name => 'images/' + name))
-    .reduce((acc, val) => acc.concat(val), []))
-).then(() => {
-  // initialize blocks
-  initializeBlocks();
-  initializeEntities();
-
+loadData(levelNames, blockClasses, entityClasses).then(() => {
   // start the game
   new Game(levelNames);
 });
