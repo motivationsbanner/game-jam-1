@@ -1,5 +1,5 @@
 {
-  "name": "js-game-template",
+  "name": "game-jam-1",
   "version": "1.0.0",
   "description": "a simple template for JavaScript games",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/motivationsbanner/js-game-template.git"
+    "url": "git+https://github.com/motivationsbanner/game-jam-1.git"
   },
   "author": "motivationsbanner",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/motivationsbanner/js-game-template/issues"
+    "url": "https://github.com/motivationsbanner/game-jam-1/issues"
   },
-  "homepage": "https://github.com/motivationsbanner/js-game-template#readme",
+  "homepage": "https://github.com/motivationsbanner/game-jam-1#readme",
   "dependencies": {
     "npm": "^6.4.1"
   },

@@ -5,7 +5,7 @@ import { initializeBlocks } from './helpers/block_helper';
 import { initializeEntities } from './helpers/entity_helper';
 
 // adjust pixi.js settings
-utils.sayHello('js-game-template');
+utils.sayHello('game-jam-1');
 settings.SCALE_MODE = SCALE_MODES.NEAREST;
 settings.RESOLUTION = window.devicePixelRatio;
 

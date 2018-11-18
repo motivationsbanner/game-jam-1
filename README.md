@@ -1,5 +1,5 @@
 # game-jam-1
-[![Build Status](https://travis-ci.org/motivationsbanner/game-jam-1.svg?branch=master)](https://travis-ci.org/motivationsbanner/js-game-template)
+[![Build Status](https://travis-ci.org/motivationsbanner/game-jam-1.svg?branch=master)](https://travis-ci.org/motivationsbanner/game-jam-1)
 
 This is the repository for the 1st **motivationsbanner** game jam.  
 You can view it in action here: https://motivationsbanner.github.io/game-jam-1
@@ -9,8 +9,8 @@ To get up and running you need to
 install [Git](https://git-scm.com//) and [Node.js](https://nodejs.org/).  
 Run these commands to install and run the dev-server:
 ```
-git clone https://github.com/motivationsbanner/js-game-template.git
-cd js-game-template
+git clone https://github.com/motivationsbanner/game-jam-1.git
+cd game-jam-1
 npm install
 npm run server
 ```
