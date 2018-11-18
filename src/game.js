@@ -1,6 +1,6 @@
 import { Application, Container, UPDATE_PRIORITY } from 'pixi.js';
-import { Level } from './entities/level';
-import { Player } from './entities/player';
+import { Level } from './game_objects/level';
+import { Player } from './game_objects/player';
 import { getJSON } from './data';
 import { Touchpad } from './utils/touchpad';
 import { GameCallbacks } from './game_callbacks';
@@ -77,7 +77,7 @@ export class Game extends Application {
   }
 
   /**
-   * Resets the Game
+   * resets the game
    */
   resetGame() {
     this.player.reset();
@@ -102,9 +102,12 @@ export class Game extends Application {
     this.container.y = Math.floor((this.height - this.levelHeight) / 2);
   }
 
+  /**
+   * updates the position of the container so
+   * the player is visible
+   * !! THIS NEEDS TO GET ADJUSTED
+   */
   adjustPerspective() {
-    // !! THIS NEEDS TO GET ADJUSTED
-
     // adjust y-axis
     if (this.levelWidth > this.width) {
       let nearTop = this.player.y <= this.halfHeight;
@@ -134,8 +137,11 @@ export class Game extends Application {
     }
   }
 
+  /**
+   * loads the next level
+   */
   loadNextLevel() {
-    // update the levelINdex
+    // update the levelIndex
     if (this._levelIndex === undefined) {
       this._levelIndex = 0;
     } else {

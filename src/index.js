@@ -9,7 +9,8 @@ utils.sayHello('js-game-template');
 settings.SCALE_MODE = SCALE_MODES.NEAREST;
 settings.RESOLUTION = window.devicePixelRatio;
 
-const levelNames = ['level1', 'level2'];
+// create list of level-names
+const levelNames = [1, 2, 3].map(i => `levels/level${i}`);
 
 // load everything
 let data = [
@@ -20,10 +21,13 @@ let data = [
 for (let name of levelNames) {
   data.push(`data/${name}.json`);
 }
+
 loadData(data).then(
   () => loadData(getJSON('blocks').map(block => 'images/' + block.name))
 ).then(
-  () => loadData(getJSON('entities').map(entity => 'images/' + entity.name))
+  () => loadData(getJSON('entities').map(entity => entity.names
+    .map(name => 'images/' + name))
+    .reduce((acc, val) => acc.concat(val), []))
 ).then(() => {
   // initialize blocks
   initializeBlocks();

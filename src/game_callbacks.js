@@ -8,4 +8,13 @@ export class GameCallbacks {
   loadNextLevel() {
     this.game.loadNextLevel();
   }
+
+  /**
+   * sends a message to all entities
+   * @param {object} message the message to send
+   */
+  sendMessage(message) {
+    // it might be a bad idea to call these directly but I'm lazy
+    this.game.level.entities.forEach(entity => entity.onMessage(message));
+  }
 }

@@ -1,7 +1,8 @@
 import { getJSON, getTexture } from '../data';
-import { BackgroundBlock, BACKGROUND_BLOCK_ID } from '../entities/blocks/background_block';
-import { StartBlock, START_BLOCK_ID } from '../entities/blocks/start_block';
-import { WallBlock, WALL_BLOCK_ID } from '../entities/blocks/wall_block';
+
+import { BackgroundBlock, BACKGROUND_BLOCK_ID } from '../game_objects/blocks/background_block';
+import { StartBlock, START_BLOCK_ID } from '../game_objects/blocks/start_block';
+import { WallBlock, WALL_BLOCK_ID } from '../game_objects/blocks/wall_block';
 
 let blocksArray = [];
 let blockClasses = [];
@@ -13,7 +14,7 @@ blockClasses[START_BLOCK_ID] = StartBlock;
 blockClasses[WALL_BLOCK_ID] = WallBlock;
 
 export function initializeBlocks() {
-  for (let block of Array.from(getJSON('blocks'))) {
+  for (let block of getJSON('blocks')) {
     blocksArray[block.id] = { texture: getTexture(block.name), solid: block.solid };
   }
 }
