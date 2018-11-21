@@ -27,7 +27,7 @@ export class Level extends Container {
     this.entities = [];
 
     let entities = level.entities;
- 
+
     entities.map(data => {
       this.spawnEntity(createEntity(data.id, data.x, data.y, data.direction, data.options));
     });

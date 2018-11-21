@@ -9,7 +9,7 @@ import { EndBlock } from './game_objects/blocks/end_block';
 export class Game extends Application {
 
   constructor(levelNames) {
-    super({ view: document.getElementById('canvas') });
+    super({ view: document.getElementById('canvas'), backgroundColor: 0x555555 });
 
     // create player
     this.player = new Player();
@@ -35,14 +35,6 @@ export class Game extends Application {
 
     // for touch input
     this.touchpad = new Touchpad(this.level);
-
-    // create eventloop
-    this.ticker.add(delta => this.update(delta));
-  }
-
-  update() {
-    // handle the perspective
-    this.adjustPerspective();
   }
 
   doTurn(event) {
@@ -89,13 +81,15 @@ export class Game extends Application {
     if (this.level.data[newPosY][newPosX] === EndBlock.ID) {
       this.loadNextLevel();
     }
+
+    // update perspective
+    this.adjustPerspective();
   }
 
+  /**
+   * adapt to the current screen-size
+   */
   adjustSize() {
-    // save map dimensions because getters iterate through all the blocks every time
-    this.levelHeight = this.level.height;
-    this.levelWidth = this.level.width;
-
     this.width = window.innerWidth / window.devicePixelRatio;
     this.height = window.innerHeight / window.devicePixelRatio;
 
@@ -105,19 +99,15 @@ export class Game extends Application {
 
     this.renderer.resize(this.width, this.height);
 
-    // set initial perspective
-    this.container.x = Math.floor((this.width - this.levelWidth) / 2);
-    this.container.y = Math.floor((this.height - this.levelHeight) / 2);
+    this.adjustPerspective();
   }
 
   /**
-   * updates the position of the container so
-   * the player is visible
-   * !! THIS NEEDS TO GET ADJUSTED
+   * adjusts the position of the container
    */
   adjustPerspective() {
     // adjust y-axis
-    if (this.levelWidth > this.width) {
+    if (this.levelHeight > this.height) {
       let nearTop = this.player.y <= this.halfHeight;
       let nearBottom = this.player.y >= this.levelHeight - this.halfHeight;
 
@@ -128,10 +118,12 @@ export class Game extends Application {
       } else {
         this.container.y = this.halfHeight - this.player.y;
       }
+    } else {
+      this.container.y = Math.floor((this.height - this.levelHeight) / 2);
     }
 
     // adjust x-axis
-    if (this.levelHeight > this.height) {
+    if (this.levelWidth > this.width) {
       let nearLeft = this.player.x <= this.halfWidth;
       let nearRight = this.player.x >= this.levelWidth - this.halfWidth;
 
@@ -142,6 +134,8 @@ export class Game extends Application {
       } else {
         this.container.x = this.halfWidth - this.player.x;
       }
+    } else {
+      this.container.x = Math.floor((this.width - this.levelWidth) / 2);
     }
   }
 
@@ -178,6 +172,10 @@ export class Game extends Application {
     // set the position of the player
     let { x, y } = this.level.getStartPosition();
     this.player.setPosition(x, y);
+
+    // save map dimensions because getters iterate through all the blocks every time
+    this.levelHeight = this.level.height;
+    this.levelWidth = this.level.width;
   }
 
   restartLevel() {
