@@ -4,6 +4,7 @@ import { Player } from './game_objects/player';
 import { getJSON } from './data';
 import { Touchpad } from './utils/touchpad';
 import { GameCallbacks } from './game_callbacks';
+import { EndBlock } from './game_objects/blocks/end_block';
 
 export class Game extends Application {
 
@@ -53,6 +54,11 @@ export class Game extends Application {
       return;
     }
 
+    if (k === 'n') {
+      this.loadNextLevel();
+      return;
+    }
+
     const input = {
       up: k == 'w' || k == 'ArrowUp',
       left: k == 'a' || k == 'ArrowLeft',
@@ -61,6 +67,11 @@ export class Game extends Application {
     };
 
     const { newPosX, newPosY } = this.player.newPosition(input);
+
+    const { xPos, yPos } = this.player;
+    if (newPosX === xPos && newPosY === yPos) {
+      return;
+    }
 
     let solid = this.level.isSolid(newPosX, newPosY);
 
@@ -73,6 +84,10 @@ export class Game extends Application {
 
     for (let entity of this.level.entities) {
       entity.update(newPosX, newPosY, this.gameCallbacks);
+    }
+
+    if (this.level.data[newPosY][newPosX] === EndBlock.ID) {
+      this.loadNextLevel();
     }
   }
 
@@ -140,6 +155,7 @@ export class Game extends Application {
 
     // show a message if the player won
     if (this._levelIndex >= this.levelNames.length) {
+      this._levelIndex -= 1;
       alert('you won!');
       return;
     }

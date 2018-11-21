@@ -5,10 +5,6 @@ export class GameCallbacks {
     this.game = game;
   }
 
-  loadNextLevel() {
-    this.game.loadNextLevel();
-  }
-
   /**
    * sends a message to all entities
    * @param {object} message the message to send
@@ -32,7 +28,10 @@ export class GameCallbacks {
    * @param {BaseEntity} entity 
    */
   remove(entity) {
-    this.game.level.removeChild(entity);
+    let level = this.game.level;
+
+    level.removeChild(entity);
+    level.entities = level.entities.filter(e => e !== entity);
   }
 
   /**

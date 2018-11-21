@@ -10,7 +10,7 @@ settings.SCALE_MODE = SCALE_MODES.NEAREST;
 settings.RESOLUTION = window.devicePixelRatio;
 
 // create list of level-names
-const levelNames = [1, 2, 3, 4].map(i => `levels/level${i}`);
+const levelNames = [1, 2, 3, 4, 5, 6].map(i => `levels/level${i}`);
 
 // load everything
 loadData(levelNames, blockClasses, entityClasses).then(() => {

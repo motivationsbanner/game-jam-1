@@ -12,10 +12,9 @@
     [0, 0, 0, 0, 0, 0],
     [2, 2, 2, 0, 2, 2],
     [0, 0, 0, 0, 0, 0],
-    [2, 2, 2, 2, 2, 0]
+    [2, 2, 2, 2, 2, 3]
 	],
   "entities": [
-    {"id": 0, "x": 5, "y": 12},
     {"id": 3, "x": 2, "y":  0, "direction": 2, "options": {"interval": 5}},
     {"id": 3, "x": 0, "y":  3, "direction": 1, "options": {"interval": 3}},
     {"id": 3, "x": 4, "y":  6, "direction": 0, "options": {"interval": 5}},

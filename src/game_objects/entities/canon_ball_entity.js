@@ -18,5 +18,5 @@ export class CanonBallEntity extends BaseEntity {
   }
 }
 
-CanonBallEntity.ID = 4;
+CanonBallEntity.ID = 0;
 CanonBallEntity.TEXTURES = ['canon_ball'];
