@@ -2,9 +2,10 @@ import { Application, Container } from 'pixi.js';
 import { Level } from './game_objects/level';
 import { Player } from './game_objects/player';
 import { getJSON } from './data';
-import { Touchpad } from './utils/touchpad';
+import { InputHandler, ACTION } from './utils/input_handler';
 import { GameCallbacks } from './game_callbacks';
 import { EndBlock } from './game_objects/blocks/end_block';
+import { DIRECTION, directionToCoordinates } from './helpers/direction_helper';
 
 export class Game extends Application {
 
@@ -30,55 +31,41 @@ export class Game extends Application {
     // create gameCallbacks object
     this.gameCallbacks = new GameCallbacks(this);
 
-    // add listener for key up event
-    window.addEventListener('keydown', event => this.doTurn(event));
-
-    // for touch input
-    this.touchpad = new Touchpad(this.level);
+    // add listener to handle input
+    this.inputHandler = new InputHandler(data => this.update(data));
   }
 
-  doTurn(event) {
-    const k = event.key;
+  update({ action, direction }) {
 
-    // check if the game should be restarted 
-    if (k == "Escape" || k == "r") {
+    if (action === ACTION.RESET_LEVEL) {
       this.restartLevel();
       return;
     }
 
-    if (k === 'n') {
+    if (action === ACTION.LOAD_NEXT_LEVEL) {
       this.loadNextLevel();
       return;
     }
 
-    const input = {
-      up: k == 'w' || k == 'ArrowUp',
-      left: k == 'a' || k == 'ArrowLeft',
-      down: k == 's' || k == 'ArrowDown',
-      right: k == 'd' || k == 'ArrowRight'
-    };
-
-    const { newPosX, newPosY } = this.player.newPosition(input);
-
-    const { xPos, yPos } = this.player;
-    if (newPosX === xPos && newPosY === yPos) {
+    if (action !== ACTION.MOVE) {
       return;
     }
+    const { xPos, yPos } = this.player;
+    const diff = directionToCoordinates(direction);
+    const newXPos = xPos + diff.x, newYPos = yPos + diff.y;
 
-    let solid = this.level.isSolid(newPosX, newPosY);
-
-    if (solid) {
+    if (this.level.isSolid(newXPos, newYPos)) {
       return;
     }
 
     // move the position
-    this.player.update(newPosX, newPosY);
+    this.player.update(newXPos, newYPos);
 
     for (let entity of this.level.entities) {
-      entity.update(newPosX, newPosY, this.gameCallbacks);
+      entity.update(newXPos, newYPos, this.gameCallbacks);
     }
 
-    if (this.level.data[newPosY][newPosX] === EndBlock.ID) {
+    if (this.level.data[newYPos][newXPos] === EndBlock.ID) {
       this.loadNextLevel();
     }
 

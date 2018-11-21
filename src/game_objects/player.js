@@ -15,24 +15,4 @@ export class Player extends GameObject {
     // increase the game time
     this.turn++;
   }
-
-  newPosition({ up, left, down, right }) {
-
-    const newPos = {
-      newPosX: this.xPos,
-      newPosY: this.yPos
-    };
-
-    if (up) {
-      newPos.newPosY -= 1;
-    } else if (left) {
-      newPos.newPosX -= 1;
-    } else if (down) {
-      newPos.newPosY += 1;
-    } else if (right) {
-      newPos.newPosX += 1;
-    }
-
-    return newPos;
-  }
 }
