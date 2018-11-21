@@ -7,7 +7,7 @@ export class InputHandler {
   constructor(callback) {
     this.callback = callback;
 
-    window.addEventListener('click', event => this.handleTouch(event));
+    window.addEventListener('touchstart', event => this.handleTouch(event));
     window.addEventListener('keydown', event => this.handleKeyDown(event));
   }
 
@@ -40,7 +40,7 @@ export class InputHandler {
   }
 
   handleTouch(event) {
-    const { screenX, screenY } = event;
+    const { screenX, screenY } = event.targetTouches[0];
     const { innerWidth, innerHeight } = window;
 
     const upperLeft = innerHeight * (1 - 1 / innerWidth * screenX) > screenY;
