@@ -1,0 +1,34 @@
+{
+  "level": [
+    [0, 2, 1, 2, 0, 2, 0, 0, 0, 0, 0, 2],
+    [0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2],
+    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2],
+    [0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2],
+    [0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2],
+    [2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2],
+    [0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2],
+    [2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2],
+    [2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 3, 0, 0, 2]
+	],
+  "entities": [
+    {"id": 1, "x": 6, "y": 8, "options": {"color": "pink"}},
+    {"id": 1, "x": 0, "y": 0, "options": {"color": "lightblue"}},
+    {"id": 1, "x": 4, "y": 0, "options": {"color": "green"}},
+    {"id": 1, "x": 6, "y": 2, "options": {"color": "yellow"}},
+    {"id": 1, "x": 7, "y": 0, "options": {"color": "blue"}},
+    {"id": 3, "x": 0, "y": 4, "direction": 0, "options": {"interval": 1}},
+    {"id": 3, "x": 0, "y": 6, "direction": 1, "options": {"interval": 3}},
+    {"id": 3, "x": 2, "y": 7, "direction": 1, "options": {"interval": 2}},
+    {"id": 3, "x": 6, "y": 6, "direction": 2, "options": {"interval": 4}},
+    {"id": 3, "x": 9, "y": 6, "direction": 2, "options": {"interval": 3}},
+    {"id": 3, "x": 10, "y": 9, "direction": 0, "options": {"interval": 2}},
+    {"id": 2, "x": 0, "y": 3, "options": {"open": true, "colors": ["pink"]}},
+    {"id": 2, "x": 4, "y": 5, "options": {"colors": ["lightblue"]}},
+    {"id": 2, "x": 5, "y": 2, "options": {"colors": ["yellow", "green"]}},
+    {"id": 2, "x": 6, "y": 1, "options": {"colors": ["yellow"]}},
+    {"id": 2, "x": 6, "y": 3, "options": {"colors": ["yellow", "green"]}},
+    {"id": 2, "x": 7, "y": 2, "options": {"colors": ["blue"]}},
+    {"id": 2, "x": 7, "y": 4, "options": {"colors": ["blue"]}}
+  ]
+}
